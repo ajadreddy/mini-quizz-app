@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
-
+import { useState } from 'react';
+import { questions } from './components/Data';
 function App() {
+
+  const [currentQuestion,setCurrentQuestion] = useState(0);
+  const handleNext = () => {
+    const nextQuestion = currentQuestion+1;
+    if(nextQuestion<questions.length){
+      setCurrentQuestion(nextQuestion);
+  }
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h3>{questions[currentQuestion].questionText}</h3>
+      {
+        questions[currentQuestion].answerOptions.map((answer)=>(
+          <div>
+            <input type="radio" /> {answer.answerText}
+          </div>
+        ))
+      }
+      <button onClick={handleNext} >Next</button>
     </div>
   );
 }
