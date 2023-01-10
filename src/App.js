@@ -3,12 +3,15 @@ import { useState } from 'react';
 import { questions } from './components/Data';
 function App() {
 
+  // const [active, setActive] = useState(false);
+
   const [currentQuestion,setCurrentQuestion] = useState(0);
   const [score,setScore] = useState(0);
   const [showScore,setShowScore] = useState(false); 
   const [selectedOption,setSelectedoption] = useState(null);
 
   const saveNext = (answer) => {
+    // setActive(!active);
     setSelectedoption(answer);
   }
 
@@ -35,15 +38,20 @@ function App() {
           <h3>{currentQuestion+1}. {questions[currentQuestion].questionText}</h3>
         </div>
         
-        {
-          questions[currentQuestion].answerOptions.map((answer)=>( 
-            <div onClick={()=>saveNext(answer)}>
-              <input name='a' type="radio" /> {answer.answerText} 
-            </div>
-          ))
-        }
-        <button onClick={()=>handleNext(selectedOption)}>Save and Next</button>
-        <button onClick={setShowScore} >Submit test</button>
+        <div className='option-section'>
+          {
+            questions[currentQuestion].answerOptions.map((answer)=>( 
+              <div className='option' onClick={()=>saveNext(answer)}>
+                <div className='act' >{answer.answerText} </div>
+              </div>
+            ))
+          }
+        </div>
+        <div className='btn-section'>
+          <button onClick={()=>handleNext(selectedOption)}>Save and Next</button>
+          <button onClick={setShowScore} >Submit test</button>
+        </div>
+        
         </>
       )
       }
