@@ -3,19 +3,16 @@ import { useState } from 'react';
 import { questions } from './components/Data';
 function App() {
 
-  // const [active, setActive] = useState(false);
+  
 
   const [currentQuestion,setCurrentQuestion] = useState(0);
   const [score,setScore] = useState(0);
   const [showScore,setShowScore] = useState(false); 
   const [selectedOption,setSelectedoption] = useState(null);
-
-  const saveNext = (answer) => {
-    // setActive(!active);
-    setSelectedoption(answer);
-  }
-
+  
+  
   const handleNext = (selectedOption) => {
+    setSelectedoption(selectedOption);
     const nextQuestion = currentQuestion+1;
     if(selectedOption){
       if(selectedOption.isCorrect===true){
@@ -26,11 +23,17 @@ function App() {
     if(nextQuestion<questions.length){
       setCurrentQuestion(nextQuestion);
     }
+    else{
+      setShowScore(true);
+    }
   }
   return (
     <div className="App">
       {showScore?(
-        <h1>You scored {score} out of {questions.length}</h1>
+        <div className='score-section'>
+          <h1>You scored {score} out of {questions.length}</h1><br />
+          <button>Start again</button>
+        </div>
       )
       :(
         <>
@@ -40,15 +43,14 @@ function App() {
         
         <div className='option-section'>
           {
-            questions[currentQuestion].answerOptions.map((answer)=>( 
-              <div className='option' onClick={()=>saveNext(answer)}>
-                <div className='act' >{answer.answerText} </div>
+            questions[currentQuestion].answerOptions.map((selectedOption)=>( 
+              <div className='option' onClick={()=>handleNext(selectedOption)}>
+                <div className='act' >{selectedOption.answerText} </div>
               </div>
             ))
           }
         </div>
         <div className='btn-section'>
-          <button onClick={()=>handleNext(selectedOption)}>Save and Next</button>
           <button onClick={setShowScore} >Submit test</button>
         </div>
         

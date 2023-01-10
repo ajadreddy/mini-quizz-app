@@ -2,7 +2,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: blue;
+    background-color: rgb(173, 173, 204);
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 button{
@@ -10,7 +10,7 @@ button{
     margin: 5px;
     border-radius: 5px;
     border: none;
-    background-color: blue;
+    background-color: rgb(67, 67, 226);
     color: white;
     cursor: pointer;
 }
@@ -41,4 +41,12 @@ button{
     height: 20px;
     border-radius: 5px;
     cursor: pointer;
+}
+.act:active{
+    background-color: rgb(87, 87, 90);
+    color: white;
+}
+.score-section{
+    padding-top: 200px;
+    padding-left: 80px;
 }
